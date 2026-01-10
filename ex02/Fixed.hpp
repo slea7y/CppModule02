@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 16:47:43 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/09 23:08:48 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/10 12:05:19 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,23 @@ class Fixed{
 		void setRawBits( int const raw );
 		float	toFloat( void ) const;
 		int		toInt( void ) const;
-};	
+		static Fixed min(Fixed a, Fixed b);
+		// static Fixed min(const Fixed a, const Fixed b);
+		static Fixed max(Fixed a, Fixed b);
+		// static Fixed max(const Fixed a, const Fixed b);
+		// math func
+		bool operator>(const Fixed& obj);
+		bool operator<(const Fixed& obj);
+		bool operator>=(const Fixed& obj);
+		bool operator<=(const Fixed& obj);
+		bool operator==(const Fixed& obj);
+		bool operator!=(const Fixed& obj);
+		void operator+(const Fixed& obj) {
+		Fixed operator-(const Fixed& obj);
+		Fixed operator*(const Fixed& obj);
+		Fixed operator/(const Fixed& obj);
+
+};
 
 std::ostream& operator<<(std::ostream& os, const Fixed& obj);
 

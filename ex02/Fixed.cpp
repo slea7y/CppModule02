@@ -6,12 +6,11 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 16:47:40 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/09 23:10:31 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/10 12:06:54 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
-
 
 std::ostream& operator<<(std::ostream& os, const Fixed& obj)
 {
@@ -43,3 +42,84 @@ float	Fixed::toFloat( void ) const {
 int	Fixed::toInt( void ) const {
 	return (_fixedPointNbV >> _nbBits);
 }
+
+// bool Fixed::greaterThan(Fixed a, Fixed b) {
+// 	if (a._fixedPointNbV > b._fixedPointNbV)
+// 		printf ("slay\n");// return (true);
+// 	else 
+// 		printf ("false slay\n");return (false);
+// }
+
+bool Fixed::operator>(const Fixed& obj) {
+	if (this > &obj)
+		return (true);
+	else 
+		return (false);
+}
+
+bool Fixed::operator<(const Fixed& obj) {
+	if (this < &obj)
+		return (true);
+	else 
+		return (false);
+}
+
+bool Fixed::operator>=(const Fixed& obj) {
+	if (this >= &obj)
+		return (true);
+	else 
+		return (false);
+}
+
+bool Fixed::operator<=(const Fixed& obj) {
+	if (this <= &obj)
+		return (true);
+	else 
+		return (false);
+}
+
+bool Fixed::operator==(const Fixed& obj) {
+	if (this == &obj)
+		return (true);
+	else 
+		return (false);
+}
+
+bool Fixed::operator!=(const Fixed& obj) {
+	if (this != &obj)
+		return (true);
+	else 
+		return (false);
+}
+
+void *Fixed::operator+(const Fixed& obj) {
+	
+}
+		
+Fixed operator-(const Fixed& obj) {
+			
+}
+		
+Fixed operator*(const Fixed& obj) {
+			
+}
+		
+Fixed operator/(const Fixed& obj) {
+			
+}
+		
+// static Fixed min(Fixed a, Fixed b) {
+
+// }
+
+// static Fixed min(const Fixed a, const Fixed b) {
+
+// }
+
+// static Fixed max(Fixed a, Fixed b) {
+	
+// }
+
+// static Fixed max(const Fixed a, const Fixed b) {
+
+// }
