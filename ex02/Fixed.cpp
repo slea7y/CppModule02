@@ -6,7 +6,7 @@
 /*   By: majkijew <majkijew@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 16:47:40 by majkijew          #+#    #+#             */
-/*   Updated: 2026/01/10 12:06:54 by majkijew         ###   ########.fr       */
+/*   Updated: 2026/01/10 19:55:57 by majkijew         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,25 @@
 
 std::ostream& operator<<(std::ostream& os, const Fixed& obj)
 {
-    os << obj.toFloat();
-    return os;
+	os << obj.toFloat();
+	return os;
 }
+
+Fixed::Fixed() : _fixedPointNbV(0) { std::cout << "Default constructor called\n";}
+
+Fixed::Fixed(const Fixed &obj) { 
+	_fixedPointNbV = obj._fixedPointNbV;
+	std::cout << "Copy constructor called\n";
+}
+
+Fixed &Fixed::operator=(const Fixed& other) {
+	std::cout << "Copy assignment operator called\n";
+	if ( this != &other )
+		_fixedPointNbV = other._fixedPointNbV;
+	return *this;
+}
+
+Fixed::~Fixed() { std::cout << "Destructor called\n"; }; 
 
 Fixed::Fixed( const int toInt ) {
 	_fixedPointNbV = toInt << _nbBits;
@@ -42,13 +58,6 @@ float	Fixed::toFloat( void ) const {
 int	Fixed::toInt( void ) const {
 	return (_fixedPointNbV >> _nbBits);
 }
-
-// bool Fixed::greaterThan(Fixed a, Fixed b) {
-// 	if (a._fixedPointNbV > b._fixedPointNbV)
-// 		printf ("slay\n");// return (true);
-// 	else 
-// 		printf ("false slay\n");return (false);
-// }
 
 bool Fixed::operator>(const Fixed& obj) {
 	if (this > &obj)
@@ -92,34 +101,78 @@ bool Fixed::operator!=(const Fixed& obj) {
 		return (false);
 }
 
-void *Fixed::operator+(const Fixed& obj) {
-	
+Fixed Fixed::operator+(const Fixed& obj) {
+	Fixed result = Fixed(*this);
+	result._fixedPointNbV += obj._fixedPointNbV;
+	return (result);
 }
 		
-Fixed operator-(const Fixed& obj) {
-			
+Fixed Fixed::operator-(const Fixed& obj) {
+	Fixed result = Fixed(*this);
+	result._fixedPointNbV -= obj._fixedPointNbV;
+	return (result);
 }
 		
-Fixed operator*(const Fixed& obj) {
-			
+Fixed Fixed::operator*(const Fixed& obj) {
+	Fixed result = Fixed(*this);
+	result._fixedPointNbV *= obj._fixedPointNbV;
+	return (result);
 }
 		
-Fixed operator/(const Fixed& obj) {
-			
+Fixed Fixed::operator/(const Fixed& obj) {
+	Fixed result = Fixed(*this);
+	result._fixedPointNbV /= obj._fixedPointNbV;
+	return (result);
 }
 		
-// static Fixed min(Fixed a, Fixed b) {
+Fixed Fixed::operator++( int ) {
+	Fixed result;
+	result = this->_fixedPointNbV++;
+	return (result);
+}
 
-// }
+Fixed Fixed::operator++( void ) {
+	Fixed result;
+	result = this->_fixedPointNbV++;
+	return (result);
+}
 
-// static Fixed min(const Fixed a, const Fixed b) {
+Fixed Fixed::operator--( void ) {
+	Fixed result;
+	result = this->_fixedPointNbV--;
+	return (result);
+}
 
-// }
+Fixed Fixed::operator--( int ) {
+	Fixed result;
+	result = this->_fixedPointNbV--;
+	return (result);
+}
 
-// static Fixed max(Fixed a, Fixed b) {
-	
-// }
+Fixed& Fixed::min(Fixed &a, Fixed &b) {
+	if (a.operator<(b) == true)
+		return (a);
+	else
+		return (b);
+}
 
-// static Fixed max(const Fixed a, const Fixed b) {
+const Fixed& Fixed::min(const Fixed &a, const Fixed &b) {
+	if (&a < &b)
+		return (a);
+	else
+		return (b);
+}
 
-// }
+Fixed& Fixed::max(Fixed &a, Fixed &b) {
+	if (a.operator>(b) == true)
+		return (a);
+	else
+		return (b);
+}
+
+const Fixed& Fixed::max(const Fixed &a, const Fixed &b) {
+	if (&a > &b)
+		return (a);
+	else
+		return (b);
+}
